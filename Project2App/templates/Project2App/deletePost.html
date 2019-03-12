@@ -1,0 +1,14 @@
+{% extends 'Project2App/base.html' %}
+
+{% block header %}
+Delete Wiki
+{% endblock header %}
+
+{% block content %}
+<p>Are you sure?</p>
+<a href="{% url 'personalWiki' %}">Cancel</a>
+{% endblock content %}
+
+{% block sidebar %}
+<h5>Sidebar block sidebar</h5>
+{% endblock sidebar %}

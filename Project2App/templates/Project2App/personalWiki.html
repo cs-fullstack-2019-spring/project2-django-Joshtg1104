@@ -1,0 +1,13 @@
+{% extends 'Project2App/base.html' %}
+
+{% block header %}
+Personal Wiki Entries
+{% endblock header %}
+
+{% block content %}
+<p>Shame on the content that tries to run game on the content. <a href="{% url 'editPost' %}">Edit</a> <a href="{% url 'deletePost' %}">Delete</a></p>
+{% endblock content %}
+
+{% block sidebar %}
+<h5>How dare you ever try to step on my sidebar. <a href="{% url 'editRelated' %}">Edit</a> <a href="{% url 'deleteRelated' %}">Delete</a></h5>
+{% endblock sidebar %}

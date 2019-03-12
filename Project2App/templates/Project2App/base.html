@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>
+{% block header %}
+This is the base
+{% endblock header %}
+</h1>
+<nav>
+    <p><h4><a href="{% url 'index' %}">Home</a> <a href="{% url 'createWiki' %}">Create Wiki</a> <a href="{% url 'personalWiki' %}">Personal Wikis</a></h4></p>
+</nav>
+{% block content %}
+<p>Base Base Baby</p>
+{% endblock content %}
+
+{% block sidebar %}
+<h5>This is a Sidebar</h5>
+{% endblock sidebar %}
+<footer>
+    <p>Wiki 2019</p>
+</footer>
+
+</body>
+</html>
