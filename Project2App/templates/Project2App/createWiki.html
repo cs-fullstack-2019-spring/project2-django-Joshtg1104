@@ -5,12 +5,21 @@ Create a New Wiki
 {% endblock header %}
 
 {% block content %}
-<p>Block ain't nothing to Brick with.</p>
-<a href="{% url 'relatedContent' %}">Add Related Content</a>
+{% if user.is_authenticated %}
+<form method="post" enctype="multipart/form-data">
+    {{ wiki.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Submit">
+    <p><a href="{% url 'relatedContent' %}">Add Related Content</a></p>
+</form>
+{% else %}
+<h3>You Can't Use This Page Unless You Are Logged In</h3>
+{% endif %}
+<p><a href="{% url 'index' %}">Cancel</a></p>
 {% endblock content %}
 
 {% block sidebar %}
-<h5>Sidebar, sidebar is the greatest.</h5>
+
 {% endblock sidebar %}
 
 

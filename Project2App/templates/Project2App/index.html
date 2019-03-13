@@ -2,12 +2,31 @@
 
 {% block header %}
 Home Page
+{% if user.is_authenticated %}
+<h3>Welcome {{ user.username }}</h3>
+{% else %}
+<h3>Welcome Visitor</h3>
+{% endif %}
 {% endblock header %}
 
 {% block content %}
-<p>Content goes here.</p>
+{% if user.is_authenticated %}
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<p><a href="{% url 'newUser' %}">New User</a></p>
+<p><a href="{% url 'login' %}">Log In</a></p>
+{% endif %}
+{% if allWiki %}
+<ul>
+    {% for eachWiki in allWiki %}
+    <li>{{ eachWiki.title }}<br> {{ eachWiki.body }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<h3>No Wikis Available</h3>
+{% endif %}
 {% endblock content %}
 
 {% block sidebar %}
-<h5>Side Side Sidebar.</h5>
+
 {% endblock sidebar %}
