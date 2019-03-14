@@ -19,7 +19,7 @@ Home Page
 {% if allWiki %}
 <ul>
     {% for eachWiki in allWiki %}
-    <li>{{ eachWiki.title }}<br> {{ eachWiki.body }}</li>
+    <li><a href="{% url 'details' eachWiki.id %}">{{ eachWiki.title }}</a><br> {{ eachWiki.body }}</li>
     {% endfor %}
 </ul>
 {% else %}

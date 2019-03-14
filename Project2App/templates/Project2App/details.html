@@ -1,0 +1,12 @@
+{% extends 'Project2App/base.html' %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+<h2>{{ detailedWiki.title }}</h2>
+{{ detailedWiki.body }}
+<p><img src="{{ detailedWiki.image.url }}" alt="" width="200"></p>
+<p><a href="{% url 'index' %}">Go Back</a></p>
+{% endblock content %}

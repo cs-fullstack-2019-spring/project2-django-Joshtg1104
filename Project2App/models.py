@@ -27,7 +27,7 @@ class BaseModel(models.Model):
 class WikiModel(BaseModel):
     title = models.CharField(max_length=100, default="")
     body = models.TextField(max_length=3000, default="")
-    image = models.ImageField(upload_to='site_media/', default='site_media/None/no-img.jpg')
+    image = models.ImageField(upload_to='media', blank=True, null=True)
     wikiForeignKey = models.ForeignKey(NewUserModel, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
@@ -37,5 +37,5 @@ class WikiModel(BaseModel):
 class RelatedContentModel(models.Model):
     Title = models.CharField(max_length=100, default="")
     body = models.TextField(max_length=1000, default="")
-    image = models.ImageField(upload_to='site_media/', default='site_media/None/no-img.jpg')
+    image = models.ImageField(upload_to='site_media/', default='')
     relatedForeignKey = models.ForeignKey(WikiModel, on_delete=models.SET_NULL, null=True, blank=True)

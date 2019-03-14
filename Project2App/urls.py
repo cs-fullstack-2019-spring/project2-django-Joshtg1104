@@ -9,6 +9,7 @@ urlpatterns = [
     path('newUser/', views.newUser, name='newUser'),
     path('createWiki/', views.createWiki, name='createWiki'),
     path('personalWiki/', views.personalWiki, name='personalWiki'),
+    path('details/<int:id>/', views.details, name='details'),
     path('relatedContent/', views.relatedContent, name='relatedContent'),
     path('editPost/', views.editPost, name='editPost'),
     path('deletePost/', views.deletePost, name='deletePost'),

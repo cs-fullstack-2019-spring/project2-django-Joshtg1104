@@ -44,6 +44,14 @@ def createWiki(request):
     return render(request, "Project2App/createWiki.html", context)
 
 
+def details(request, id):
+    detailedWiki = get_object_or_404(WikiModel, pk=id)
+    context = {
+        "detailedWiki": detailedWiki
+    }
+    return render(request, "Project2App/details.html", context)
+
+
 def personalWiki(request):
     return render(request, "Project2App/personalWiki.html")
 
