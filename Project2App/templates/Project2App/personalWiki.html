@@ -5,7 +5,11 @@ Personal Wiki Entries
 {% endblock header %}
 
 {% block content %}
-<p>Shame on the content that tries to run game on the content. <a href="{% url 'editPost' %}">Edit</a> <a href="{% url 'deletePost' %}">Delete</a></p>
+{% if user.is_authenticated %}
+{% for wiki in userWikis %}
+<p><a href="{% url 'details' wiki.id %}">{{ wiki.title }}</a> <br> {{ wiki.body }} <a href="{% url 'editPost' %}">Edit</a> <a href="{% url 'deletePost' %}">Delete</a></p>
+{% endfor %}
+{% endif %}
 {% endblock content %}
 
 {% block sidebar %}

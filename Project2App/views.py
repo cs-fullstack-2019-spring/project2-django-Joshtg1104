@@ -53,7 +53,15 @@ def details(request, id):
 
 
 def personalWiki(request):
-    return render(request, "Project2App/personalWiki.html")
+    if request.user.is_authenticated:
+        wikiUser = NewUserModel.objects.get(username=request.user)
+        userWikis = WikiModel.objects.filter(wikiForeignKey=wikiUser)
+    else:
+        userWikis = ""
+    context = {
+            "userWikis": userWikis
+        }
+    return render(request, "Project2App/personalWiki.html", context)
 
 
 def relatedContent(request):

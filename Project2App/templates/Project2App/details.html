@@ -8,5 +8,6 @@
 <h2>{{ detailedWiki.title }}</h2>
 {{ detailedWiki.body }}
 <p><img src="{{ detailedWiki.image.url }}" alt="" width="200"></p>
-<p><a href="{% url 'index' %}">Go Back</a></p>
+<p><a href="{% url 'index' %}">Home</a>
+<a href="{% url 'personalWiki' %}">Personal</a></p>
 {% endblock content %}
