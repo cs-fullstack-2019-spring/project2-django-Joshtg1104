@@ -5,10 +5,14 @@ Delete Wiki
 {% endblock header %}
 
 {% block content %}
+<form action="{% url 'deletePost' delete.pk %}" method="post">
+    {% csrf_token %}
 <p>Are you sure?</p>
-<a href="{% url 'personalWiki' %}">Cancel</a>
+<a href="{% url 'personalWiki' %}"><button>No</button></a>
+<button>Yes</button>
+</form>
 {% endblock content %}
 
 {% block sidebar %}
-<h5>Sidebar block sidebar</h5>
+
 {% endblock sidebar %}

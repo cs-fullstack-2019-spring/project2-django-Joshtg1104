@@ -5,10 +5,14 @@ Delete Related Content
 {% endblock header %}
 
 {% block content %}
-<p>Are you sure?</p>
-<a href="{% url 'personalWiki' %}">Cancel</a>
+<form action="{% url 'deleteRelated' deletecontent.pk %}" method="post">
+    {% csrf_token %}
+    <p>Are you sure?</p>
+    <a href="{% url 'details' wikiID %}">No</a>
+    <button>Yes</button>
+</form>
 {% endblock content %}
 
 {% block sidebar %}
-<h5>Sidebar block sidebar</h5>
+
 {% endblock sidebar %}

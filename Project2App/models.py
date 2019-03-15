@@ -35,7 +35,7 @@ class WikiModel(BaseModel):
 
 
 class RelatedContentModel(models.Model):
-    Title = models.CharField(max_length=100, default="")
+    title = models.CharField(max_length=100, default="")
     body = models.TextField(max_length=1000, default="")
-    image = models.ImageField(upload_to='site_media/', default='')
+    image = models.ImageField(upload_to='media', blank=True, null=True)
     relatedForeignKey = models.ForeignKey(WikiModel, on_delete=models.SET_NULL, null=True, blank=True)

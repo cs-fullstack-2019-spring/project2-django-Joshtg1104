@@ -6,12 +6,19 @@ Personal Wiki Entries
 
 {% block content %}
 {% if user.is_authenticated %}
+{% if userWikis %}
 {% for wiki in userWikis %}
-<p><a href="{% url 'details' wiki.id %}">{{ wiki.title }}</a> <br> {{ wiki.body }} <a href="{% url 'editPost' %}">Edit</a> <a href="{% url 'deletePost' %}">Delete</a></p>
+<p><a href="{% url 'details' wiki.id %}">{{ wiki.title }}</a> <br> {{ wiki.body|slice:"0:170" }} <a
+        href="{% url 'editPost' wiki.id %}">Edit</a> <a href="{% url 'deletePost' wiki.id %}">Delete</a></p>
 {% endfor %}
+{% else %}
+<h3>You have no personal entries</h3>
+{% endif %}
+{% else %}
+<h3>You have to be logged in to check your personal wikis.</h3>
 {% endif %}
 {% endblock content %}
 
 {% block sidebar %}
-<h5>How dare you ever try to step on my sidebar. <a href="{% url 'editRelated' %}">Edit</a> <a href="{% url 'deleteRelated' %}">Delete</a></h5>
+
 {% endblock sidebar %}

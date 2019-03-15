@@ -11,15 +11,15 @@ Home Page
 
 {% block content %}
 {% if user.is_authenticated %}
-<p><a href="{% url 'logout' %}">Log Out</a></p>
+<p><a href="{% url 'logout' %}"><button>Log Out</button></a></p>
 {% else %}
-<p><a href="{% url 'newUser' %}">New User</a></p>
-<p><a href="{% url 'login' %}">Log In</a></p>
+<p><a href="{% url 'newUser' %}"><button>New User</button></a></p>
+<p><a href="{% url 'login' %}"><button>Log In</button></a></p>
 {% endif %}
 {% if allWiki %}
 <ul>
     {% for eachWiki in allWiki %}
-    <li><a href="{% url 'details' eachWiki.id %}">{{ eachWiki.title }}</a><br> {{ eachWiki.body }}</li>
+    <li><a href="{% url 'details' eachWiki.id %}">{{ eachWiki.title }}</a><br> {{ eachWiki.body|slice:"0:170" }}</li>
     {% endfor %}
 </ul>
 {% else %}

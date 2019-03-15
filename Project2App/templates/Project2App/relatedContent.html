@@ -5,10 +5,15 @@ Related Content
 {% endblock header %}
 
 {% block content %}
-<p>Do you remember how many contents you have written in your life?</p>
-<a href="{% url 'createWiki' %}">Cancel</a>
+{% if user.is_authenticated %}
+<form method="post" enctype="multipart/form-data">
+    {{ related.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Add">
+</form>
+{% endif %}
+<a href="{% url 'details' id%}">Cancel</a>
 {% endblock content %}
 
 {% block sidebar %}
-<h5>Show me the sidebar</h5>
 {% endblock sidebar %}

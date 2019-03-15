@@ -5,10 +5,14 @@ Edit Related Content
 {% endblock header %}
 
 {% block content %}
-<p>Block block block the power</p>
-<a href="{% url 'personalWiki' %}">Cancel</a>
+<form action="{% url 'editRelated' relID %}" method="post">
+    {% csrf_token %}
+    {{ edit.as_p }}
+    <button>Save</button>
+<a href="{% url 'details' wikiID %}">Cancel</a>
+</form>
 {% endblock content %}
 
 {% block sidebar %}
-<h5>Sidey sidey bar sidey yea sidey yay.</h5>
+
 {% endblock sidebar %}

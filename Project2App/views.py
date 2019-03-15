@@ -46,8 +46,10 @@ def createWiki(request):
 
 def details(request, id):
     detailedWiki = get_object_or_404(WikiModel, pk=id)
+    related = RelatedContentModel.objects.filter(relatedForeignKey=detailedWiki)
     context = {
-        "detailedWiki": detailedWiki
+        "detailedWiki": detailedWiki,
+        "relatedItems": related
     }
     return render(request, "Project2App/details.html", context)
 
@@ -59,26 +61,82 @@ def personalWiki(request):
     else:
         userWikis = ""
     context = {
-            "userWikis": userWikis
-        }
+        "userWikis": userWikis
+    }
     return render(request, "Project2App/personalWiki.html", context)
 
 
-def relatedContent(request):
-    return render(request, "Project2App/relatedContent.html")
+def relatedContent(request, id):
+    relatedform = RelatedContentForm(request.POST)
+    if request.user.is_authenticated:
+        detailedWiki = get_object_or_404(WikiModel, pk=id)
+        if relatedform.is_valid():
+            print(request.POST)
+            RelatedContentModel.objects.create(title=request.POST["title"], body=request.POST["body"],
+                                               image=request.FILES["image"], relatedForeignKey=detailedWiki)
+            return redirect('details', id)
+    context = {
+        "related": relatedform,
+        "errors": relatedform.errors,
+        "id": id,
+    }
+    return render(request, "Project2App/relatedContent.html", context)
 
 
-def editPost(request):
-    return render(request, "Project2App/editPost.html")
+def editPost(request, contID):
+    editContent = get_object_or_404(WikiModel, pk=contID)
+    if request.method == "POST":
+        wikiform = WikiForm(request.POST, instance=editContent)
+        if wikiform.is_valid():
+            wikiform.save()
+        return redirect('personalWiki')
+    wikiform = WikiForm(instance=editContent)
+    context = {
+        "wikiform": wikiform,
+        "contID": contID
+    }
+    return render(request, "Project2App/editPost.html", context)
 
 
-def deletePost(request):
-    return render(request, "Project2App/deletePost.html")
+def deletePost(request, contID):
+    deleteContent = get_object_or_404(WikiModel, pk=contID)
+    if request.method == "POST":
+        deleteContent.delete()
+        return redirect('personalWiki')
+    return render(request, "Project2App/deletePost.html", {"delete": deleteContent, "contID": contID})
 
 
-def editRelated(request):
-    return render(request, "Project2App/editRelated.html")
+def editRelated(request, relID):
+    editcontent = get_object_or_404(RelatedContentModel, pk=relID)
+    wikiID = editcontent.relatedForeignKey.id
+    if request.method == "POST":
+        relatedform = RelatedContentForm(request.POST, instance=editcontent)
+
+        print(wikiID)
+        if relatedform.is_valid():
+            relatedform.save()
+        return redirect('details', wikiID)
+    relatedform = RelatedContentForm(instance=editcontent)
+    context = {
+        "edit": relatedform,
+        "wikiID": wikiID,
+        "relID": relID
+    }
+    return render(request, "Project2App/editRelated.html", context)
 
 
-def deleteRelated(request):
-    return render(request, "Project2App/deleteRelated.html")
+def deleteRelated(request, relID):
+    deletecontent = get_object_or_404(RelatedContentModel, pk=relID)
+    wikiID = deletecontent.relatedForeignKey.id
+    if request.method == "POST":
+        deletecontent.delete()
+
+        # detailedWiki = get_object_or_404(WikiModel, pk=wikiID)
+        # related = RelatedContentModel.objects.filter(relatedForeignKey=detailedWiki)
+        # context = {
+        #     "detailedWiki": detailedWiki,
+        #     "relatedItems": related
+        # }
+        # return render(request, "Project2App/details.html", context)
+        return redirect('details', wikiID)
+    return render(request, "Project2App/deleteRelated.html", {"deletecontent": deletecontent, "wikiID": wikiID})

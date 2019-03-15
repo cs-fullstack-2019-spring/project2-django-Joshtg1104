@@ -10,7 +10,6 @@ Create a New Wiki
     {{ wiki.as_p}}
     {% csrf_token %}
     <input type="submit" value="Submit">
-    <p><a href="{% url 'relatedContent' %}">Add Related Content</a></p>
 </form>
 {% else %}
 <h3>You Can't Use This Page Unless You Are Logged In</h3>
