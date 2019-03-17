@@ -2,31 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Joshua's Project 2 Wiki</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'Project2App/css/bootstrap.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'Project2App/css/bootstrap.css' %}">-->
     <link rel="stylesheet" href="{% static 'Project2App/css/base.css' %}">
     <script src="{% static 'Project2App/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Project2App/js/bootstrap.js' %}"></script>
 </head>
-<body>
+<body class="arrange">
 
 <h1>
-    {% block header %}
-    This is the base
-    {% endblock header %}
+    <header class="jumbotron">
+        {% block header %}
+        This is the base
+        {% endblock header %}
+    </header>
 </h1>
 <nav>
     <h4><a href="{% url 'index' %}">Home</a> <a href="{% url 'createWiki' %}">Create Wiki</a>
         <a href="{% url 'personalWiki' %}">Personal Wikis</a></h4>
 </nav>
-{% block content %}
-<p>Base Base Baby</p>
-{% endblock content %}
-
-{% block sidebar %}
-<h5>This is a Sidebar</h5>
-{% endblock sidebar %}
+<content>
+    {% block content %}
+    <p>Base Base Baby</p>
+    {% endblock content %}
+</content>
+<sidebar>
+    {% block sidebar %}
+    <h5>This is a Sidebar</h5>
+    {% endblock sidebar %}
+</sidebar>
 <footer>
     <p>Wiki 2019</p>
 </footer>

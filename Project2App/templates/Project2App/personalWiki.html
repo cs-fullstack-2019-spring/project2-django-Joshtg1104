@@ -8,7 +8,7 @@ Personal Wiki Entries
 {% if user.is_authenticated %}
 {% if userWikis %}
 {% for wiki in userWikis %}
-<p><a href="{% url 'details' wiki.id %}">{{ wiki.title }}</a> <br> {{ wiki.body|slice:"0:170" }} <a
+<p><a href="{% url 'details' wiki.id %}">{{ wiki.title }}</a> <br> {{ wiki.body|slice:"0:170" }} <br><a
         href="{% url 'editPost' wiki.id %}">Edit</a> <a href="{% url 'deletePost' wiki.id %}">Delete</a></p>
 {% endfor %}
 {% else %}
