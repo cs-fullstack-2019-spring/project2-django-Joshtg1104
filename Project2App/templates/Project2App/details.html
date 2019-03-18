@@ -18,8 +18,12 @@
 
 {% block sidebar %}
 {% for related in relatedItems %}
-    {{ related.title }} <br> {{ related.body|slice:"0:50" }}
-<p><a href="{% url 'editRelated' related.pk %}">Edit</a>
-<a href="{% url 'deleteRelated' related.pk %}">Delete</a></h5></p>
+<div class="extendedSidebar">
+    {{ related.title }} <br> {{ related.body }} <br> <img src="{{ related.image.url }}" alt="" width="150">
+    {% if user.is_authenticated %}
+    <p><h5><a href="{% url 'editRelated' related.pk %}">Edit</a>
+    <a href="{% url 'deleteRelated' related.pk %}">Delete</a></h5></p>
+    {% endif %}
+</div>
 {% endfor %}
 {% endblock sidebar %}

@@ -6,21 +6,22 @@
     {% load static %}
     <!--<link rel="stylesheet" href="{% static 'Project2App/css/bootstrap.css' %}">-->
     <link rel="stylesheet" href="{% static 'Project2App/css/base.css' %}">
-    <script src="{% static 'Project2App/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'Project2App/js/bootstrap.js' %}"></script>
+    <!--<script src="{% static 'Project2App/js/jquery-3.3.1.min.js' %}"></script>-->
+    <!--<script src="{% static 'Project2App/js/bootstrap.js' %}"></script>-->
 </head>
 <body class="arrange">
 
-<h1>
-    <header class="jumbotron">
+<header>
+    <h1>
         {% block header %}
         This is the base
         {% endblock header %}
-    </header>
-</h1>
+    </h1>
+</header>
 <nav>
-    <h4><a href="{% url 'index' %}">Home</a> <a href="{% url 'createWiki' %}">Create Wiki</a>
-        <a href="{% url 'personalWiki' %}">Personal Wikis</a></h4>
+    <h4 class="background01"><p class="lineup"><a class="textcolor01" href="{% url 'index' %}">Home</a></p>
+        <p class="lineup"><a class="textcolor02" href="{% url 'createWiki' %}">Create Wiki</a></p>
+        <p class="lineup"><a class="textcolor03" href="{% url 'personalWiki' %}">Personal Wikis</a></p></h4>
 </nav>
 <content>
     {% block content %}
@@ -33,7 +34,7 @@
     {% endblock sidebar %}
 </sidebar>
 <footer>
-    <p>Wiki 2019</p>
+    <p class="tag"><strong>Wiki 2019</strong></p>
 </footer>
 
 </body>

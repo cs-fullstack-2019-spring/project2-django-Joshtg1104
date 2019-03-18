@@ -1,11 +1,11 @@
 {% extends 'Project2App/base.html' %}
 
 {% block header %}
-Home Page
+<p class="resize">Home Page</p>
 {% if user.is_authenticated %}
-<h3>Welcome {{ user.username }}</h3>
+<h2 class="textcolor">Welcome {{ user.username }}</h2>
 {% else %}
-<h3>Welcome Visitor</h3>
+<h2>Welcome Visitor</h2>
 {% endif %}
 {% endblock header %}
 
