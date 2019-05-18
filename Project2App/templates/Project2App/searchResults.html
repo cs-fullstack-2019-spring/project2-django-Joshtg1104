@@ -1,0 +1,13 @@
+{% extends 'Project2App/base.html' %}
+
+{% block content %}
+{% if results %}
+<ul>
+    {% for eachq in results %}
+    <li><a href="{% url 'details' eachq.id %}">{{ eachq.title }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No Results</p>
+{% endif %}
+{% endblock content %}

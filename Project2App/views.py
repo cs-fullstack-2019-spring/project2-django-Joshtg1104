@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .forms import NewUserForm, RelatedContentForm, WikiForm, NewUserModel, RelatedContentModel, WikiModel
+from django.db.models import Q
 
 
 # Create your views here.
@@ -22,6 +23,7 @@ def newUser(request):
         if userform.is_valid():
             # saves the form if it is valid
             userform.save()
+
             User.objects.create_user(request.POST["username"], "", request.POST["password1"])
             return redirect('index')
     context = {
@@ -156,3 +158,11 @@ def deleteRelated(request, relID):
         # return render(request, "Project2App/details.html", context)
         return redirect('details', wikiID)
     return render(request, "Project2App/deleteRelated.html", {"deletecontent": deletecontent, "wikiID": wikiID})
+
+def search(request):
+    lookup = WikiModel.objects.filter(Q(title__contains=request.POST['q']))
+    print(lookup)
+    context = {
+        "results": lookup
+    }
+    return render(request, "Project2App/searchResults.html", context)

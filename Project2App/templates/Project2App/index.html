@@ -2,6 +2,12 @@
 
 {% block header %}
 <p class="resize">Home Page</p>
+<form method="POST" action="{% url 'search' %}">
+    {% csrf_token %}
+    <input type="text" placeholder="Search..." name='q'>
+    <input type="submit">
+</form>
+
 {% if user.is_authenticated %}
 <h2 class="textcolor">Welcome {{ user.username }}</h2>
 {% else %}
