@@ -24,7 +24,7 @@ SECRET_KEY = 'clska5-rv2y&$ukwbf_!z=s^ql34-!0q$kye-tu&(vv%q=xg8)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['134.209.166.44', 'app1.joshuagrahamcoding.com']
 
 # Application definition
 
@@ -113,6 +113,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 
