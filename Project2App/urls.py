@@ -7,9 +7,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('newUser/', views.newUser, name='newUser'),
-
     path('search/', views.search, name='search'),
-
     path('createWiki/', views.createWiki, name='createWiki'),
     path('personalWiki/', views.personalWiki, name='personalWiki'),
     path('details/<int:id>/', views.details, name='details'),

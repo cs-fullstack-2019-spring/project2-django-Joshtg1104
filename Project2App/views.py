@@ -32,7 +32,7 @@ def newUser(request):
     }
     return render(request, "Project2App/newUser.html", context)
 
-# allows the wikiform to appear when the Create Wiki link is selectec
+# allows the wikiform to appear when the Create Wiki link is selected
 def createWiki(request):
     # creates a variable for the WikiForm
     wikiform = WikiForm(request.POST)
