@@ -9,7 +9,9 @@
 {{ detailedWiki.body }}
 <p><img src="{{ detailedWiki.image.url }}" alt="" width="200"></p>
 {% if user.is_authenticated %}
+{% if request.user.username == detailedWiki.wikiForeignKey.username  %}
 <p><a href="{% url 'relatedContent' detailedWiki.id%}">Add Related Content</a></p>
+{% endif %}
 {% endif %}
 <p><a href="{% url 'index' %}">Home</a>
     <a href="{% url 'personalWiki' %}">Personal</a></p>
