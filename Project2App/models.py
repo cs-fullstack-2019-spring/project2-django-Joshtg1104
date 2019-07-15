@@ -27,7 +27,7 @@ class BaseModel(models.Model):
 class WikiModel(BaseModel):
     title = models.CharField(max_length=100, default="")
     body = models.TextField(max_length=3000, default="")
-    image = models.ImageField(upload_to='media', blank=True, null=True)
+    image = models.ImageField(upload_to='media', blank=True, null=True, default="")
     wikiForeignKey = models.ForeignKey(NewUserModel, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):

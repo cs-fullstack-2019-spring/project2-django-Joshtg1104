@@ -24,7 +24,7 @@ SECRET_KEY = 'clska5-rv2y&$ukwbf_!z=s^ql34-!0q$kye-tu&(vv%q=xg8)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['134.209.166.44', 'app1.joshuagrahamcoding.com']
+ALLOWED_HOSTS = ['134.209.166.44', 'app1.joshuagrahamcoding.com', '127.0.0.1', 'localhost', '8000']
 
 # Application definition
 
