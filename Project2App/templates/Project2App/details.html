@@ -7,7 +7,11 @@
 {% block content %}
 <h2>{{ detailedWiki.title }}</h2>
 {{ detailedWiki.body }}
-<p><img src="{{ detailedWiki.image.url }}" alt="" width="200"></p>
+{% if detailedWiki.image %}
+<p><img src="/media/{{ detailedWiki.image }}" alt="" width="200"></p>
+{% else %}
+<p><img src="" alt="" width=""></p>
+{% endif %}
 {% if user.is_authenticated %}
 {% if request.user.username == detailedWiki.wikiForeignKey.username  %}
 <p><a href="{% url 'relatedContent' detailedWiki.id%}">Add Related Content</a></p>

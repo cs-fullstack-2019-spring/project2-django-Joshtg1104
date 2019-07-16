@@ -40,11 +40,30 @@ def createWiki(request):
     if request.user.is_authenticated:
         user = NewUserModel.objects.get(username=request.user)
         if wikiform.is_valid():
+
+            if request.FILES:
+                print("This one has an image in it")
+                WikiModel.objects.create(title=request.POST["title"], body=request.POST["body"],
+                                         image=request.FILES["image"] or None, wikiForeignKey=user)
+                return redirect('index')
+            else:
+                print('This one does not')
+                WikiModel.objects.create(title=request.POST["title"], body=request.POST["body"], wikiForeignKey=user)
+                return redirect('index')
+
+            print("POST")
             print(request.POST)
+            print("FILES")
+            print(request.FILES)
+            print("END")
             # if the form is valid then a new wiki entry will be created
-            WikiModel.objects.create(title=request.POST["title"], body=request.POST["body"],
-                                     image=request.FILES["image"], wikiForeignKey=user)
-            return redirect('index')
+            print(request.FILES["image"])
+            print("Print")
+            # WikiModel.objects.create(title=request.POST["title"], body=request.POST["body"],
+            #                          image=request.FILES["image"] or None, wikiForeignKey=user)
+            # wikiform.save()
+            # return redirect('index')
+
     # if the a user is not logged in then this will happen
     context = {
         "wiki": wikiform,
@@ -87,7 +106,7 @@ def relatedContent(request, id):
         if relatedform.is_valid():
             print(request.POST)
             RelatedContentModel.objects.create(title=request.POST["title"], body=request.POST["body"],
-                                               image=request.FILES["image"], relatedForeignKey=detailedWiki)
+                                               image=request.FILES["image"] or None, relatedForeignKey=detailedWiki)
             return redirect('details', id)
     # otherwise this happens
     context = {
