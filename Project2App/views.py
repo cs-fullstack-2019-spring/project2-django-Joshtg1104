@@ -16,6 +16,7 @@ def index(request):
     }
     return render(request, "Project2App/index.html", context)
 
+
 # allows the NewUserForm to appear on its own page when the new User button on the index html is clicked
 def newUser(request):
     userform = NewUserForm(request.POST or None)
@@ -32,6 +33,7 @@ def newUser(request):
     }
     return render(request, "Project2App/newUser.html", context)
 
+
 # allows the wikiform to appear when the Create Wiki link is selected
 def createWiki(request):
     # creates a variable for the WikiForm
@@ -40,29 +42,18 @@ def createWiki(request):
     if request.user.is_authenticated:
         user = NewUserModel.objects.get(username=request.user)
         if wikiform.is_valid():
-
+            # if the form is valid then a new wiki entry will be created
             if request.FILES:
+                # If there is FILES in image field
                 print("This one has an image in it")
                 WikiModel.objects.create(title=request.POST["title"], body=request.POST["body"],
                                          image=request.FILES["image"] or None, wikiForeignKey=user)
                 return redirect('index')
             else:
+                # If there is not FILES in image field
                 print('This one does not')
                 WikiModel.objects.create(title=request.POST["title"], body=request.POST["body"], wikiForeignKey=user)
                 return redirect('index')
-
-            print("POST")
-            print(request.POST)
-            print("FILES")
-            print(request.FILES)
-            print("END")
-            # if the form is valid then a new wiki entry will be created
-            print(request.FILES["image"])
-            print("Print")
-            # WikiModel.objects.create(title=request.POST["title"], body=request.POST["body"],
-            #                          image=request.FILES["image"] or None, wikiForeignKey=user)
-            # wikiform.save()
-            # return redirect('index')
 
     # if the a user is not logged in then this will happen
     context = {
@@ -70,6 +61,7 @@ def createWiki(request):
         "errors": wikiform.errors
     }
     return render(request, "Project2App/createWiki.html", context)
+
 
 # allows the details of specific wikis articles to appear on their own page
 def details(request, id):
@@ -82,6 +74,7 @@ def details(request, id):
         "relatedItems": related
     }
     return render(request, "Project2App/details.html", context)
+
 
 # a function that filters out any articles not created by the user if the Personal Wikis link is selected
 def personalWiki(request):
@@ -97,6 +90,7 @@ def personalWiki(request):
     }
     return render(request, "Project2App/personalWiki.html", context)
 
+
 # allows for related content to be created and appear on detailed pages
 def relatedContent(request, id):
     relatedform = RelatedContentForm(request.POST)
@@ -105,9 +99,16 @@ def relatedContent(request, id):
         detailedWiki = get_object_or_404(WikiModel, pk=id)
         if relatedform.is_valid():
             print(request.POST)
-            RelatedContentModel.objects.create(title=request.POST["title"], body=request.POST["body"],
-                                               image=request.FILES["image"] or None, relatedForeignKey=detailedWiki)
-            return redirect('details', id)
+            if request.FILES:
+                # If FILES is in the image field
+                RelatedContentModel.objects.create(title=request.POST["title"], body=request.POST["body"],
+                                                   image=request.FILES["image"] or None, relatedForeignKey=detailedWiki)
+                return redirect('details', id)
+            else:
+                # If FILES is not image field
+                RelatedContentModel.objects.create(title=request.POST["title"], body=request.POST["body"],
+                                                   relatedForeignKey=detailedWiki)
+                return redirect('details', id)
     # otherwise this happens
     context = {
         "related": relatedform,
@@ -115,6 +116,7 @@ def relatedContent(request, id):
         "id": id,
     }
     return render(request, "Project2App/relatedContent.html", context)
+
 
 # allows the user to edit wiki entries
 def editPost(request, contID):
@@ -132,6 +134,7 @@ def editPost(request, contID):
     }
     return render(request, "Project2App/editPost.html", context)
 
+
 # allows the user to delete wiki entries
 def deletePost(request, contID):
     deleteContent = get_object_or_404(WikiModel, pk=contID)
@@ -141,6 +144,7 @@ def deletePost(request, contID):
         return redirect('personalWiki')
     # otherwise does not delete the wiki entry
     return render(request, "Project2App/deletePost.html", {"delete": deleteContent, "contID": contID})
+
 
 # allows for related content to be edited by a user
 def editRelated(request, relID):
@@ -161,6 +165,7 @@ def editRelated(request, relID):
     }
     return render(request, "Project2App/editRelated.html", context)
 
+
 # allows the user to delete their related content
 def deleteRelated(request, relID):
     deletecontent = get_object_or_404(RelatedContentModel, pk=relID)
@@ -177,6 +182,7 @@ def deleteRelated(request, relID):
         # return render(request, "Project2App/details.html", context)
         return redirect('details', wikiID)
     return render(request, "Project2App/deleteRelated.html", {"deletecontent": deletecontent, "wikiID": wikiID})
+
 
 def search(request):
     lookup = WikiModel.objects.filter(Q(title__contains=request.POST['q']))

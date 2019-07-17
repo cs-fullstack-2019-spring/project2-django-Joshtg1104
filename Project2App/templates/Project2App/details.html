@@ -25,7 +25,12 @@
 {% block sidebar %}
 {% for related in relatedItems %}
 <div class="extendedSidebar">
-    {{ related.title }} <br> {{ related.body }} <br> <img src="{{ related.image.url }}" alt="" width="150">
+    <strong style="text-decoration: underline">{{ related.title }}</strong> <br> {{ related.body }} <br>
+    {% if related.image.url %}
+    <img src="{{ related.image.url }}" alt="" width="150">
+    {% else %}
+    <p><img src="" alt="" width=""></p>
+    {% endif %}
     {% if request.user.username == detailedWiki.wikiForeignKey.username  %}
     <p><h5><a href="{% url 'editRelated' related.pk %}">Edit</a>
     <a href="{% url 'deleteRelated' related.pk %}">Delete</a></h5></p>
