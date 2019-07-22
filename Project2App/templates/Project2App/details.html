@@ -26,8 +26,8 @@
 {% for related in relatedItems %}
 <div class="extendedSidebar">
     <strong style="text-decoration: underline">{{ related.title }}</strong> <br> {{ related.body }} <br>
-    {% if related.image.url %}
-    <img src="{{ related.image.url }}" alt="" width="150">
+    {% if related.image %}
+    <img src="/media/{{ related.image }}" alt="" width="150">
     {% else %}
     <p><img src="" alt="" width=""></p>
     {% endif %}
